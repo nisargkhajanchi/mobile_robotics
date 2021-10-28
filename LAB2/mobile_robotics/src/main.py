@@ -8,7 +8,7 @@ import tf.transformations as tfm
 # from visualization_msgs.msg import Marker
 from geometry_msgs.msg import Point, Pose, PoseStamped, Twist
 import numpy as np
-from mobile_robotics.msg import WheelCmdVel
+
 
 nTfRetry = 1
 retryTime = 0.05
@@ -173,7 +173,7 @@ def main():
     start_pos_matrix = matrix_from_xyzquat(april_reach.init_pos)
 
     #get a target pose in a matrix format
-    des_pos = [0.0, 0.0 , 0.12, 1, 1, 1, 0 ]
+    des_pos = [0.12, 0.0 , 0.0, 0, 1, 1, 0 ]
     des_pos_matrix = matrix_from_xyzquat(des_pos)
     # Y = des_pos_matrix
     # X = start_pos_matrix
