@@ -153,12 +153,12 @@ class ApriltagReach():
         
         self.velcmd_pub.publish(const_vel)
         
-        print("/cmd_vel start publish")
+        print("vel cmd start")
         rospy.sleep(11)
         
-        #const_vel.linear.x=const_vel.linear.y=const_vel.linear.z=0.0
-        #const_vel.angular.x=const_vel.angular.y=const_vel.angular.z=0.0
-        #print("/cmd_vel finished")
+        const_vel.linear.x=const_vel.linear.y=const_vel.linear.z=0.0
+        const_vel.angular.x=const_vel.angular.y=const_vel.angular.z=0.0
+        print("vel cmd done")
         
         self.velcmd_pub.publish(const_vel)
 
@@ -173,17 +173,17 @@ def main():
     start_pos_matrix = matrix_from_xyzquat(april_reach.init_pos)
 
     #get a target pose in a matrix format
-    des_pos = [0.12, 0.0 , april_reach.init_pos[2], 0, 1, 1, 0 ]
+    des_pos = [0.0, 0.0 , 0.12, 1, 1, 1, 0 ]
     des_pos_matrix = matrix_from_xyzquat(des_pos)
     # Y = des_pos_matrix
     # X = start_pos_matrix
 
     # trans matrix to SE3
     X = sp.SE3(start_pos_matrix)
-    print("Init pose in SE3 is :")
+    print("Start pose - SE3 :")
     print(X)
     Y = sp.SE3(des_pos_matrix)
-    print("Target pose in SE3 is :")
+    print("Des pose in - SE3  :")
     print(Y)
     
     # Y=X*exp(Qt)
@@ -193,9 +193,9 @@ def main():
     # log(Y*X^1) = Qt
     Log_YX_1 = YX_1.log()
     
-    # t = 10s
+    # t = 11s
     Q = Log_YX_1/10
-    print("T=10s,Ω:")
+    print("Dynamic Trajectory Ω:")
     print(Q)
     april_reach.Q = Q
 
